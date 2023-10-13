@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stats Table</h1>
+    <table id="statsTable">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>GDP</th>
+                <th>Unemployment Rate</th>
+                <th>Inflation Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h1>Correlation Table</h1>
+    <table id="correlationTable">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>GDP</th>
+                <th>Unemployment Rate</th>
+                <th>Inflation Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h1>Key Indicators Table</h1>
+    <table id="keyIndicatorsTable">
+        <thead>
+            <tr>
+                <th>Statistic</th>
+                <th>Mean</th>
+                <th>Standard Deviation</th>
+                <th>Coefficient of Variation (CV)</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Sample JSON data
+        const jsonData = {
+            stats: [
+                { Year: 2020, GDP: 21000, 'Unemployment Rate': 5, 'Inflation Rate': 2 },
+                { Year: 2021, GDP: 22000, 'Unemployment Rate': 4.5, 'Inflation Rate': 2.2 },
+                // Add more data here...
+            ],
+            correlation: [
+                { Year: 2020, GDP: 0.95, 'Unemployment Rate': 0.85, 'Inflation Rate': 0.65 },
+                { Year: 2021, GDP: 0.96, 'Unemployment Rate': 0.82, 'Inflation Rate': 0.68 },
+                // Add more data here...
+            ],
+            key_indicators: [
+                { Statistic: 'Mean', GDP: 21500, 'Unemployment Rate': 4.75, 'Inflation Rate': 2.1 },
+                { Statistic: 'Std Dev', GDP: 500, 'Unemployment Rate': 0.35, 'Inflation Rate': 0.25 },
+                { Statistic: 'CV', GDP: 0.023, 'Unemployment Rate': 0.074, 'Inflation Rate': 0.119 },
+            ],
+        };
+
+        function populateTable(tableId, data) {
+            const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+
+            data.forEach(item => {
+                const row = table.insertRow();
+                for (const key in item) {
+                    if (item.hasOwnProperty(key)) {
+                        const cell = row.insertCell();
+                        cell.innerText = item[key];
+                    }
+                }
+            });
+        }
+
+        // Populate the tables with JSON data
+        populateTable('statsTable', jsonData.stats);
+        populateTable('correlationTable', jsonData.correlation);
+        populateTable('keyIndicatorsTable', jsonData.key_indicators);
+    </script>
+</body>
+</html>
